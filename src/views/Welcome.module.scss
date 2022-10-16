@@ -2,6 +2,7 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: #8D4CD6;
 
     >header {
         flex-shrink: 0;
@@ -9,10 +10,14 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding-top: 66px;
+        color: white;
     }
 
     >main {
         flex-grow: 1;
+        display: flex;
+        flex-direction: column;
     }
 
     >footer {
