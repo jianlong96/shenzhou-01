@@ -1,8 +1,9 @@
 .wrapper {
-    height: 100vh;
+    height: calc(100vh - var(--welcome-nav-height));
     display: flex;
     flex-direction: column;
-    background-color: #8D4CD6;
+    background-color: var(--welcome-bg);
+    margin-bottom: var(--welcome-nav-height);
 
     >header {
         flex-shrink: 0;
