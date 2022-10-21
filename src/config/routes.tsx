@@ -7,10 +7,11 @@ import { Second } from '../components/welcome/Second'
 import { SecondActions } from "../components/welcome/SecondActions";
 import { Third } from '../components/welcome/Third'
 import { ThirdActions } from "../components/welcome/ThirdActions";
-import { Welcome } from '../views/Welcome'
+import { Welcome } from '../views/Welcome';
+import { StartPage } from '../views/StartPage';
 
 export const routes: RouteRecordRaw[] = [
-    { path: '/', redirect: '/welcome' },
+    { path: '/', redirect: '/welcome/1' },
     {
         path: '/welcome',
         component: Welcome,
@@ -20,5 +21,6 @@ export const routes: RouteRecordRaw[] = [
             { path: '3', components: { main: Third, footer: ThirdActions }, },
             { path: '4', components: { main: Forth, footer: ForthActions }, },
         ],
-    }
+    },
+    { path: '/start', component: StartPage },
 ]
