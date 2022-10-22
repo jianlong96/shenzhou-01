@@ -1,0 +1,27 @@
+.navbar {
+    color: var(--navbar-text);
+    fill: var(--navbar-text);
+    background: var(--navbar-bg);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 40px 16px 12px;
+}
+
+.title_wrapper {
+    font-size: 24px;
+    margin-left: 12px;
+}
+
+.icon_wrapper {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+
+    >* {
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
