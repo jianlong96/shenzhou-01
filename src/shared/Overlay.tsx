@@ -1,4 +1,5 @@
 import { defineComponent, PropType } from 'vue';
+import { RouterLink } from 'vue-router';
 import { Icon } from './Icon';
 import s from './Overlay.module.scss';
 
@@ -8,30 +9,38 @@ export const Overlay = defineComponent({
             type: Function as PropType<() => void>
         }
     },
+
     setup: (props, context) => {
         const close = () => {
             props.onClose?.()
         }
+        const onClickSignIn = () => { }
         return () => <>
             <div class={s.mask} onClick={close}></div>
             <div class={s.overlay}>
-                <section>
+                <section class={s.currentUser} onClick={onClickSignIn}>
                     <h2>未登陆用户</h2>
                     <p>点击这里登陆</p>
                 </section>
                 <nav>
-                    <ul>
+                    <ul class={s.action_list}>
                         <li>
-                            <Icon name='tongji' />
-                            <span>统计图表</span>
+                            <RouterLink to="/tongji" class={s.action}>
+                                <Icon name="tongji" class={s.icon} />
+                                <span>统计图表</span>
+                            </RouterLink>
                         </li>
                         <li>
-                            <Icon name='daochu' />
-                            <span>导出数据</span>
+                            <RouterLink to="/daochu" class={s.action}>
+                                <Icon name="daochu" class={s.icon} />
+                                <span>导出数据</span>
+                            </RouterLink>
                         </li>
                         <li>
-                            <Icon name='tixing' />
-                            <span>记账提醒</span>
+                            <RouterLink to="/tixing" class={s.action}>
+                                <Icon name="tixing" class={s.icon} />
+                                <span>记账提醒</span>
+                            </RouterLink>
                         </li>
                     </ul>
                 </nav>
