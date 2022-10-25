@@ -1,4 +1,6 @@
 import { defineComponent, PropType } from 'vue';
+import { MainLayout } from '../layouts/Mainlayout';
+import { Icon } from '../shared/Icon';
 import s from './ItemCreate.module.scss';
 export const ItemCreate = defineComponent({
     props: {
@@ -8,7 +10,15 @@ export const ItemCreate = defineComponent({
     },
     setup: (props, context) => {
         return () => (
-            <div class={s.wrapper}>hi</div>
+            <MainLayout>{
+                {
+                    title: () => '记一笔',
+                    icon: () => <Icon name='left' class={s.navIcon} />,
+                    default: () => <>
+                        <div>main</div>
+                    </>
+                }
+            }</MainLayout>
         )
     }
 })
