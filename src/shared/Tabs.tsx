@@ -6,14 +6,11 @@ export const Tabs = defineComponent({
             type: String as PropType<string>,
             requied: false,
         },
-        onUpdateSelected: {
-            type: Function as PropType<(name: string) => void>,
-            required: false,
-        }
     },
     setup: (props, context) => {
         return () => {
             const array = context.slots.default?.()
+            console.log((array as any))
             if (!array) return () => null
             for (let i = 0; i < array.length; i++) {
                 if (array[i].type !== Tab) {
@@ -24,7 +21,7 @@ export const Tabs = defineComponent({
                 <ol class={s.tabs_nav}>
                     {array.map(item =>
                         <li class={item.props?.name === props.selected ? s.selected : ''}
-                            onClick={() => props.onUpdateSelected?.(item.props?.name)}>
+                            onClick={() => context.emit('update:selected', item.props?.name)}>
                             {item.props?.name}
                         </li>)}
                 </ol>
