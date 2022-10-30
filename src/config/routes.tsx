@@ -2,6 +2,8 @@ import { RouteRecordRaw } from 'vue-router'
 import { First } from '../components/welcome/First'
 import { FirstActions } from "../components/welcome/FirstActions";
 import { Forth } from '../components/welcome/Forth'
+import { TagCreate } from "../components/tag/TagCreate";
+import { TagEdit } from "../components/tag/TagEdit";
 import { ForthActions } from "../components/welcome/ForthActions";
 import { Second } from '../components/welcome/Second'
 import { SecondActions } from "../components/welcome/SecondActions";
@@ -12,7 +14,7 @@ import { StartPage } from '../views/StartPage';
 import { ItemPage } from '../views/ItemPage';
 import { ItemList } from '../views/ItemList';
 import { ItemCreate } from '../views/ItemCreate';
-
+import { TagPage } from "../views/TagPage";
 export const routes: RouteRecordRaw[] = [
     { path: '/', redirect: '/welcome/1' },
     {
@@ -31,6 +33,13 @@ export const routes: RouteRecordRaw[] = [
         children: [
             { path: '', component: ItemList },
             { path: 'create', component: ItemCreate },
+        ]
+    },
+    {
+        path: '/tags', component: TagPage,
+        children: [
+            { path: 'create', component: TagCreate },
+            { path: ':id', component: TagEdit }
         ]
     }
 ]
