@@ -41,8 +41,8 @@
     border-top: 1px solid var(--button-border-color);
 
     >button {
-        border: none;
-        background: var(--button-bg);
+        border: 1px solid #DDDDDD;
+        background: white;
 
         &:nth-child(1) {
             grid-area: n1;
