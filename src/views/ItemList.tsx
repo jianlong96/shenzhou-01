@@ -13,8 +13,8 @@ export const ItemList = defineComponent({
         const refSelected = ref(0)
         const time = new Time()
         const customTime = reactive({
-            start: new Time(),
-            end: new Time()
+            start: new Time().format(),
+            end: new Time().format()
         })
         const timeList = [
             {
@@ -57,8 +57,8 @@ export const ItemList = defineComponent({
                                 endDate={timeList[2].end.format()} />
                         </Tab>
                         <Tab name="自定义时间">
-                            <ItemSummary startDate={customTime.start.format()}
-                                endDate={customTime.end.format()} />
+                            <ItemSummary startDate={customTime.start}
+                                endDate={customTime.end} />
                         </Tab>
                     </Tabs>
                     <Overlay show={refOverlayVisible.value} class={s.overlay} >
