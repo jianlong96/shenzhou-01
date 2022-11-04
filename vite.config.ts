@@ -16,5 +16,12 @@ export default defineConfig({
             mergeProps: true
         }),
         svgstore(),
-    ]
+    ],
+    server: {
+        proxy: {
+            '/api/v1': {
+                target: 'http://121.196.236.94:3000/',
+            }
+        }
+    }
 })
