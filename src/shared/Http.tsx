@@ -38,6 +38,7 @@ export const http = new Http('/api/v1')
 http.instance.interceptors.request.use(config => {
     const jwt = localStorage.getItem('jwt')
     if (jwt) {
+        // 断言config.headers不为空，在请求头里加jwt
         config.headers!.Authorization = `Bearer ${jwt}`
     }
     return config

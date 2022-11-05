@@ -4,6 +4,7 @@ import { MainLayout } from '../layouts/MainLayout';
 import { useRoute, useRouter } from 'vue-router';
 import { useBool } from '../hooks/useBool';
 import { Button } from '../shared/Button';
+import { refreshMe } from '../shared/me';
 import { http } from '../shared/Http';
 import { Form, FormItem } from '../shared/Form';
 import { history } from '../shared/history';
@@ -39,6 +40,7 @@ export const SignInPage = defineComponent({
                 localStorage.setItem('jwt', response.data.jwt)
                 // router.push('/sign_in?return_to='+ encodeURIComponent(route.fullPath))
                 const returnTo = route.query.return_to?.toString()
+                refreshMe()
                 router.push(returnTo || '/')
             }
         }
