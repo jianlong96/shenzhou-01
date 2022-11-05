@@ -5,6 +5,7 @@ import { useBool } from '../hooks/useBool';
 import { Button } from '../shared/Button';
 import { http } from '../shared/Http';
 import { Form, FormItem } from '../shared/Form';
+import { history } from '../shared/history';
 import { Icon } from '../shared/Icon';
 import { hasError, validate } from '../shared/validate';
 import s from './SignInPage.module.scss';
@@ -31,7 +32,9 @@ export const SignInPage = defineComponent({
                 { key: 'code', type: 'required', message: '必填' },
             ]))
             if (!hasError(errors)) {
-                const response = await http.post('/session', formData)
+                const response = await http.post<{ jwt: string }>('/session', formData)
+                localStorage.setItem('jwt', response.data.jwt)
+                history.push('/')
             }
         }
         const onError = (error: any) => {
