@@ -6,6 +6,7 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
 type JSONValue = null | boolean | string | number | JSONValue[] | Record<string, JSONValue>
 
 type Tag = {
@@ -14,4 +15,12 @@ type Tag = {
   name: string,
   sign: string,
   kind: "expenses" | "income",
+}
+type Resources<T = any> = {
+  resources: T[]
+  pager: {
+    page: number,
+    per_page: number,
+    count: number
+  }
 }
