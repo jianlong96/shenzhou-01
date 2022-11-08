@@ -6,6 +6,7 @@ import { EmojiSelect } from '../../shared/EmojiSelect';
 import { Icon } from '../../shared/Icon';
 import { Rules, validate } from '../../shared/validate';
 import { TagForm } from './tagForm';
+import { BackIcon } from '../../shared/backIcon';
 export const TagCreate = defineComponent({
 
     setup: (props, context) => {
@@ -30,7 +31,7 @@ export const TagCreate = defineComponent({
         return () => (
             <MainLayout>{{
                 title: () => '新建标签',
-                icon: () => <Icon name="left" onClick={() => { }} />,
+                icon: () => <BackIcon />,
                 default: () => (
                     <TagForm />
                 )
