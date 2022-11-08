@@ -4,8 +4,10 @@ import axios, {
   AxiosRequestConfig,
   AxiosResponse,
 } from "axios";
+
 import {
   mockItemCreate,
+  mockItemIndex,
   mockSession,
   mockTagEdit,
   mockTagIndex,
@@ -23,9 +25,6 @@ export class Http {
       baseURL,
     });
   }
-  // CRUD
-
-  // read
   get<R = unknown>(
     url: string,
     query?: Record<string, JSONValue>,
@@ -38,7 +37,6 @@ export class Http {
       method: "get",
     });
   }
-  // create
   post<R = unknown>(
     url: string,
     data?: Record<string, JSONValue>,
@@ -46,7 +44,6 @@ export class Http {
   ) {
     return this.instance.request<R>({ ...config, url, data, method: "post" });
   }
-  // update
   patch<R = unknown>(
     url: string,
     data?: Record<string, JSONValue>,
@@ -54,7 +51,6 @@ export class Http {
   ) {
     return this.instance.request<R>({ ...config, url, data, method: "patch" });
   }
-  // destroy
   delete<R = unknown>(
     url: string,
     query?: Record<string, string>,
@@ -92,20 +88,20 @@ const mock = (response: AxiosResponse) => {
     case "tagEdit":
       [response.status, response.data] = mockTagEdit(response.config);
       return true;
+    case "itemIndex":
+      [response.status, response.data] = mockItemIndex(response.config);
+      return true;
   }
   return false;
 };
 export const http = new Http("/api/v1");
-
 http.instance.interceptors.request.use((config) => {
   const jwt = localStorage.getItem("jwt");
   if (jwt) {
-    // 断言config.headers不为空，在请求头里加jwt
     config.headers!.Authorization = `Bearer ${jwt}`;
   }
   return config;
 });
-
 http.instance.interceptors.response.use(
   (response) => {
     mock(response);
