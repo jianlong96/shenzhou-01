@@ -18,6 +18,7 @@ import { TagPage } from "../views/TagPage";
 import { SignInPage } from "../views/SignInPage";
 import { http } from "../shared/Http";
 import { StatisticsPage } from "../views/StatisticsPage";
+import { ComingSoon } from "../shared/ComingSoon";
 export const routes: RouteRecordRaw[] = [
   { path: "/", redirect: "/welcome/1" },
   {
@@ -57,5 +58,13 @@ export const routes: RouteRecordRaw[] = [
   {
     path: "/tongji",
     component: StatisticsPage,
+  },
+  {
+    path: "/daochu",
+    component: ComingSoon,
+  },
+  {
+    path: "/tixing",
+    component: ComingSoon,
   },
 ];
