@@ -10,13 +10,11 @@ import { SecondActions } from "../components/welcome/SecondActions";
 import { Third } from "../components/welcome/Third";
 import { ThirdActions } from "../components/welcome/ThirdActions";
 import { Welcome } from "../views/Welcome";
-import { StartPage } from "../views/StartPage";
 import { ItemPage } from "../views/ItemPage";
 import { ItemList } from "../views/ItemList";
 import { ItemCreate } from "../views/ItemCreate";
 import { TagPage } from "../views/TagPage";
 import { SignInPage } from "../views/SignInPage";
-import { http } from "../shared/Http";
 import { StatisticsPage } from "../views/StatisticsPage";
 import { ComingSoon } from "../shared/ComingSoon";
 export const routes: RouteRecordRaw[] = [
@@ -25,7 +23,7 @@ export const routes: RouteRecordRaw[] = [
     path: "/welcome",
     component: Welcome,
     beforeEnter: (to, from, next) => {
-      localStorage.getItem("skipFeatures") === "yes" ? next("/start") : next();
+      localStorage.getItem("skipFeatures") === "yes" ? next("/items") : next();
     },
     children: [
       { path: "1", components: { main: First, footer: FirstActions } },
@@ -34,7 +32,6 @@ export const routes: RouteRecordRaw[] = [
       { path: "4", components: { main: Forth, footer: ForthActions } },
     ],
   },
-  { path: "/start", component: StartPage },
   {
     path: "/items",
     component: ItemPage,
