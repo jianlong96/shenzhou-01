@@ -32,12 +32,17 @@ export const ItemSummary = defineComponent({
       if (!props.startDate || !props.endDate) {
         return;
       }
-      const response = await http.get<Resources<Item>>("/items", {
-        happen_after: props.startDate,
-        happen_before: props.endDate,
-        page: page.value + 1,
-        _mock: "itemIndex",
-      });
+      const response = await http.get<Resources<Item>>(
+        "/items",
+        {
+          happen_after: props.startDate,
+          happen_before: props.endDate,
+          page: page.value + 1,
+        },
+        {
+          _mock: "itemIndex",
+        }
+      );
       const { resources, pager } = response.data;
       items.value?.push(...resources);
       hasMore.value =
