@@ -3,6 +3,7 @@ import { Dialog } from "vant";
 import { defineComponent, onMounted, PropType, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { MainLayout } from "../layouts/Mainlayout";
+import { hasError, validate } from "../shared/validate";
 import { Icon } from "../shared/Icon";
 import { useTags } from "../shared/useTags";
 import { Button } from "../shared/Button";
@@ -19,11 +20,17 @@ export const ItemCreate = defineComponent({
     },
   },
   setup: (props, context) => {
-    const formData = reactive({
-      kind: "支出",
-      tags_id: [],
+    const formData = reactive<Partial<Item>>({
+      kind: "expenses",
+      tag_ids: [],
       amount: 0,
       happen_at: new Date().toISOString(),
+    });
+    const errors = reactive<FormErrors<typeof formData>>({
+      kind: [],
+      tag_ids: [],
+      amount: [],
+      happen_at: [],
     });
     const router = useRouter();
     const onError = (error: AxiosError<ResourceError>) => {
@@ -36,8 +43,38 @@ export const ItemCreate = defineComponent({
       throw error;
     };
     const onSubmit = async () => {
+      Object.assign(errors, {
+        kind: [],
+        tag_ids: [],
+        amount: [],
+        happen_at: [],
+      });
+      Object.assign(
+        errors,
+        validate(formData, [
+          { key: "kind", type: "required", message: "类型必填" },
+          { key: "tag_ids", type: "required", message: "标签必填" },
+          { key: "amount", type: "required", message: "金额必填" },
+          {
+            key: "amount",
+            type: "notEqual",
+            value: 0,
+            message: "金额不能为零",
+          },
+          { key: "happen_at", type: "required", message: "时间必填" },
+        ])
+      );
+      if (hasError(errors)) {
+        Dialog.alert({
+          title: "出错",
+          message: Object.values(errors)
+            .filter((i) => i.length > 0)
+            .join("\n"),
+        });
+        return;
+      }
       await http
-        .post<Resource<Item>>("/items", {
+        .post<Resource<Item>>("/items", formData, {
           _mock: "itemCreate",
           _autoLoading: true,
         })
@@ -53,16 +90,16 @@ export const ItemCreate = defineComponent({
             <>
               <div class={s.wrapper}>
                 <Tabs v-model:selected={formData.kind} class={s.tabs}>
-                  <Tab name="支出">
+                  <Tab value="expenses" name="支出">
                     <Tags
                       kind="expenses"
-                      v-model:selected={formData.tags_id[0]}
+                      v-model:selected={formData.tag_ids![0]}
                     />
                   </Tab>
-                  <Tab name="收入">
+                  <Tab value="income" name="收入">
                     <Tags
                       kind="income"
-                      v-model:selected={formData.tags_id[0]}
+                      v-model:selected={formData.tag_ids![0]}
                     />
                   </Tab>
                 </Tabs>
