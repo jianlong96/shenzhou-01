@@ -39,7 +39,7 @@ export const ItemSummary = defineComponent({
     watch(
       () => [props.startDate, props.endDate],
       () => {
-        itemStore.reset();
+        itemStore.$reset();
         itemStore.fetchItems();
       }
     );
