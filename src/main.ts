@@ -6,7 +6,6 @@ import { routes } from "./config/routes";
 import { history } from "./shared/history";
 import "@svgstore";
 import { createPinia, storeToRefs } from "pinia";
-import { Dialog } from "vant";
 const router = createRouter({ history, routes });
 
 const pinia = createPinia();
