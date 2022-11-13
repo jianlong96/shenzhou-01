@@ -8,6 +8,7 @@ const pushMap: Record<string, string> = {
   Welcome3: "/welcome/4",
   Welcome4: "/items",
 };
+type Params = { Component: VNode; route: RouteLocationNormalizedLoaded };
 export const Welcome = defineComponent({
   setup: (props, context) => {
     const main = ref<HTMLElement | null>(null);
@@ -24,20 +25,14 @@ export const Welcome = defineComponent({
         </header>
         <main class={s.main}>
           <RouterView name="main" ref={main}>
-            {({
-              Component: X,
-              route: R,
-            }: {
-              Component: VNode;
-              route: RouteLocationNormalizedLoaded;
-            }) => (
+            {({ Component: comp }: Params) => (
               <Transition
                 enterFromClass={s.slide_fade_enter_from}
                 enterActiveClass={s.slide_fade_enter_active}
                 leaveToClass={s.slide_fade_leave_to}
                 leaveActiveClass={s.slide_fade_leave_active}
               >
-                {X}
+                {comp}
               </Transition>
             )}
           </RouterView>
