@@ -10,7 +10,6 @@ import { SecondActions } from "../components/welcome/SecondActions";
 import { Third } from "../components/welcome/Third";
 import { ThirdActions } from "../components/welcome/ThirdActions";
 import { Welcome } from "../views/Welcome";
-import { ItemPage } from "../views/ItemPage";
 import { ItemList } from "../views/ItemList";
 import { ItemCreate } from "../views/ItemCreate";
 import { TagPage } from "../views/TagPage";
@@ -21,7 +20,7 @@ export const routes: RouteRecordRaw[] = [
   { path: "/", redirect: "/welcome/1" },
   {
     path: "/welcome",
-    component: Welcome,
+    component: () => import("../views/Welcome"),
     beforeEnter: (to, from, next) => {
       localStorage.getItem("skipFeatures") === "yes" ? next("/items") : next();
     },
@@ -34,7 +33,7 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: "/items",
-    component: ItemPage,
+    component: () => import("../views/ItemPage"),
     children: [
       { path: "", component: ItemList },
       { path: "create", component: ItemCreate },
@@ -42,23 +41,29 @@ export const routes: RouteRecordRaw[] = [
   },
   {
     path: "/tags",
-    component: TagPage,
+    component: () => import("../views/TagPage"),
     children: [
-      { path: "create", component: TagCreate },
-      { path: ":id/edit", component: TagEdit },
+      {
+        path: "create",
+        component: () => import("../components/tag/TagCreate"),
+      },
+      {
+        path: ":id/edit",
+        component: () => import("../components/tag/TagEdit"),
+      },
     ],
   },
   {
     path: "/sign_in",
-    component: SignInPage,
+    component: () => import("../views/SignInPage"),
   },
   {
     path: "/tongji",
-    component: StatisticsPage,
+    component: () => import("../views/StatisticsPage"),
   },
   {
     path: "/daochu",
-    component: ComingSoon,
+    component: () => import("../shared/ComingSoon"),
   },
   {
     path: "/tixing",
