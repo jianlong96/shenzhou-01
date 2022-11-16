@@ -11,7 +11,7 @@ import { ItemList } from "../views/ItemList";
 import { ItemCreate } from "../views/ItemCreate";
 import { ComingSoon } from "../shared/ComingSoon";
 export const routes: RouteRecordRaw[] = [
-  { path: "/", redirect: "/welcome/1" },
+  { path: "/", redirect: "/welcome" },
   {
     path: "/welcome",
     component: () => import("../views/Welcome"),
@@ -19,6 +19,7 @@ export const routes: RouteRecordRaw[] = [
       localStorage.getItem("skipFeatures") === "yes" ? next("/items") : next();
     },
     children: [
+      { path: "", redirect: "/welcome/1" },
       { path: "1", components: { main: First, footer: FirstActions } },
       { path: "2", components: { main: Second, footer: SecondActions } },
       { path: "3", components: { main: Third, footer: ThirdActions } },
