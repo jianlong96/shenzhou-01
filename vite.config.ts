@@ -36,6 +36,8 @@ export default defineConfig(({ command }) => {
         },
       },
     },
+    base: "./",
+    assetsDir: "assets",
     plugins: [
       vue(),
       vueJsx({
