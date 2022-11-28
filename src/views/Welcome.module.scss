@@ -2,7 +2,9 @@
     height: calc(100vh - var(--welcome-nav-height));
     display: flex;
     flex-direction: column;
-    background-color: var(--welcome-bg);
+    // background: var(--welcome-bg);
+    background: linear-gradient(var(--welcome-bg), var(--welcome-bg-bottom));
+    // background-color: var(--welcome-bg);
     margin-bottom: var(--welcome-nav-height);
 
     >header {
